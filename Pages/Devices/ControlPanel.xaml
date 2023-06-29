@@ -1,9 +1,10 @@
-﻿<Page x:Class="DeviceControlPanel.Pages.Devices.ControlPanel"
+﻿<Page
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:DeviceControlPanel.Pages.Devices"
+      xmlns:UserControls="clr-namespace:DeviceControlPanel.UserControls" x:Class="DeviceControlPanel.Pages.Devices.ControlPanel"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="800"
       Title="ControlPanel">
@@ -81,8 +82,7 @@
                 <TextBlock x:Name="textBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Device Status" VerticalAlignment="Center" Foreground="White" FontFamily="Poppins ExtraLight" FontSize="21.333"/>
             </Grid>
 
-            <ListBox x:Name="listBox" Grid.Row="1" Background="{x:Null}"/>
-
+            <ListBox x:Name="lbDevices" Grid.Row="1" Background="{x:Null}"/>
         </Grid>
 
         <Grid Margin="0" Grid.Column="1">
@@ -92,10 +92,10 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <StackPanel Margin="0" Orientation="Horizontal">
-                <Button x:Name="btnSearch" Content="Search" Style="{DynamicResource ButtonStyle2}" BorderBrush="{x:Null}" BorderThickness="0" Height="50" Padding="10,1"/>
+                <Button x:Name="btnSearch" Content="Search" Style="{DynamicResource ButtonStyle2}" BorderBrush="{x:Null}" BorderThickness="0" Height="50" Padding="10,1" Click="btnSearch_Click"/>
                 <Button x:Name="btnNew" Content="New" Style="{DynamicResource ButtonStyle2}" BorderBrush="{x:Null}" BorderThickness="0" Height="50" Padding="10,1"/>
-                <Button x:Name="btnSync" Content="Sync DateTime" Style="{DynamicResource ButtonStyle2}" BorderBrush="{x:Null}" BorderThickness="0" Height="50" Padding="10,1"/>
-                <Button x:Name="btnDownloadTransaction" Content="Download Transactions" Style="{DynamicResource ButtonStyle2}" BorderBrush="{x:Null}" BorderThickness="0" Height="50" Padding="10,1"/>
+                <Button x:Name="btnSync" Content="Sync DateTime" Style="{DynamicResource ButtonStyle2}" BorderBrush="{x:Null}" BorderThickness="0" Height="50" Padding="10,1" Click="btnSync_Click"/>
+                <Button x:Name="btnDownloadTransaction" Content="Download Transactions" Style="{DynamicResource ButtonStyle2}" BorderBrush="{x:Null}" BorderThickness="0" Height="50" Padding="10,1" Click="btnDownloadTransaction_Click"/>
             </StackPanel>
             <TabControl x:Name="tabControl" Grid.Row="1" Margin="0,0,10,0" Background="{x:Null}">
                 <TabItem Header="Device Information">
@@ -105,23 +105,23 @@
                                 <StackPanel HorizontalAlignment="Left" Orientation="Vertical" VerticalAlignment="Top" Margin="0">
                                     <StackPanel Orientation="Horizontal" d:LayoutOverrides="Width, LeftPosition, RightPosition, TopPosition, BottomPosition" Margin="0,5,0,0">
                                         <TextBlock x:Name="textBlock1" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Width="100" Text="Name"/>
-                                        <TextBox x:Name="textBox" TextWrapping="Wrap" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+                                        <TextBox x:Name="txbName" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" d:LayoutOverrides="Width, LeftPosition, RightPosition" Margin="0,5,0,0">
                                         <TextBlock x:Name="textBlock2" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Width="100" Text="IP Address"/>
-                                        <TextBox x:Name="textBox1" TextWrapping="Wrap" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+                                        <TextBox x:Name="txbIP" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,5,0,0" d:LayoutOverrides="LeftPosition, RightPosition">
                                         <TextBlock x:Name="textBlock3" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Width="100" Text="Port"/>
-                                        <TextBox x:Name="textBox2" TextWrapping="Wrap" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+                                        <TextBox x:Name="txbPort" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" Text="4370"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,5,0,0" d:LayoutOverrides="LeftPosition, RightPosition">
-                                        <TextBlock x:Name="textBlock4" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Width="100" Text="Serial Number"/>
-                                        <TextBox x:Name="textBox3" TextWrapping="Wrap" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+                                        <TextBlock x:Name="textBlock4" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Width="100" Text="Brand"/>
+                                        <TextBox x:Name="txbBrand" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
                                     </StackPanel>
                                 </StackPanel>
-                                <Button x:Name="btnSave" Content="Save" Style="{DynamicResource ButtonStyle2}" BorderBrush="{x:Null}" BorderThickness="0" Padding="10,1" Margin="319,0,-229,50"/>
-                                <Button x:Name="btnGetDeviceInfo" Content="Get Device Info" Style="{DynamicResource ButtonStyle2}" BorderBrush="{x:Null}" BorderThickness="0" Padding="10,1" Margin="319,46,-229,4"/>
+                                <Button x:Name="btnSave" Content="Save" Style="{DynamicResource ButtonStyle2}" BorderBrush="{x:Null}" BorderThickness="0" Padding="10,1" Margin="319,0,-229,50" Click="btnSave_Click" IsEnabled="False"/>
+                                <Button x:Name="btnGetDeviceInfo" Content="Get Device Info" Style="{DynamicResource ButtonStyle2}" BorderBrush="{x:Null}" BorderThickness="0" Padding="10,1" Margin="319,46,-229,4" Click="btnGetDeviceInfo_Click"/>
                             </Grid>
                         </GroupBox>
                         <GroupBox Header="Device Information" Margin="10,178,0,0" Height="148" VerticalAlignment="Top" HorizontalAlignment="Left" Width="531">
@@ -130,37 +130,37 @@
                                     <StackPanel HorizontalAlignment="Left" Orientation="Vertical" VerticalAlignment="Top" Margin="0,0,20,0">
                                         <StackPanel Orientation="Horizontal" d:LayoutOverrides="Width, LeftPosition, RightPosition, TopPosition, BottomPosition" Margin="0,5,0,0">
                                             <TextBlock x:Name="textBlock5" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Width="100" Text="Model"/>
-                                            <TextBox x:Name="textBox4" TextWrapping="Wrap" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+                                            <TextBox x:Name="txbModel" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" d:LayoutOverrides="Width, LeftPosition, RightPosition" Margin="0,5,0,0">
                                             <TextBlock x:Name="textBlock6" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Width="100" Text="Processor"/>
-                                            <TextBox x:Name="textBox5" TextWrapping="Wrap" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+                                            <TextBox x:Name="txbProcessor" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0" d:LayoutOverrides="LeftPosition, RightPosition">
                                             <TextBlock x:Name="textBlock7" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Width="100" Text="Version"/>
-                                            <TextBox x:Name="textBox6" TextWrapping="Wrap" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+                                            <TextBox x:Name="txbVersion" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0" d:LayoutOverrides="LeftPosition, RightPosition">
                                             <TextBlock x:Name="textBlock8" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Width="100" Text="Serial Number"/>
-                                            <TextBox x:Name="textBox7" TextWrapping="Wrap" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+                                            <TextBox x:Name="txbSerialNumber" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment" CharacterCasing="Upper"/>
                                         </StackPanel>
                                     </StackPanel>
                                     <StackPanel HorizontalAlignment="Left" Orientation="Vertical" VerticalAlignment="Top" Margin="0,0,20,0">
                                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                             <TextBlock x:Name="textBlock17" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Width="100" Text="Employee"/>
-                                            <TextBox x:Name="textBox16" TextWrapping="Wrap" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+                                            <TextBox x:Name="textBox16" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                             <TextBlock x:Name="textBlock18" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Width="100" Text="Administrator"/>
-                                            <TextBox x:Name="textBox17" TextWrapping="Wrap" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+                                            <TextBox x:Name="textBox17" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                             <TextBlock x:Name="textBlock19" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Width="100" Text="Template"/>
-                                            <TextBox x:Name="textBox18" TextWrapping="Wrap" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+                                            <TextBox x:Name="textBox18" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                                             <TextBlock x:Name="textBlock20" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Width="100" Text="Transactions"/>
-                                            <TextBox x:Name="textBox19" TextWrapping="Wrap" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+                                            <TextBox x:Name="textBox19" Margin="0" Width="120" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>

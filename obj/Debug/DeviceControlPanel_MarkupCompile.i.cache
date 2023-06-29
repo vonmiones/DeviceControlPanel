@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 E:\PROJECTS\APP\mi15systems\desktop\BiometricDevice\DeviceControlPanel\App.xaml
-3-1468126669
+41386609443
 
-13738131295
-14-574180952
-MainWindow.xaml;Pages\Devices\ControlPanel.xaml;Pages\Systems\ConfigPage.xaml;
+25-1188060629
+201358595096
+MainWindow.xaml;Pages\Devices\ControlPanel.xaml;Pages\Systems\ConfigPage.xaml;UserControls\DeviceListBoxItem.xaml;
 
-False
+True
 

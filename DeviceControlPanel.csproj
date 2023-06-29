@@ -39,8 +39,21 @@
       <HintPath>packages\Dapper.2.0.143\lib\net461\Dapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SQLite.Designer">
+      <HintPath>C:\Users\WHITEHAT\Downloads\Compressed\sqlite-netFx45-binary-bundle-Win32-2012-1.0.117.0\SQLite.Designer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>C:\Users\WHITEHAT\Downloads\Compressed\sqlite-netFx45-binary-bundle-Win32-2012-1.0.117.0\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6">
+      <HintPath>C:\Users\WHITEHAT\Downloads\Compressed\sqlite-netFx45-binary-bundle-Win32-2012-1.0.117.0\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq">
+      <HintPath>C:\Users\WHITEHAT\Downloads\Compressed\sqlite-netFx45-binary-bundle-Win32-2012-1.0.117.0\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -60,6 +73,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\BackgroundSwitcher.cs" />
+    <Compile Include="Classes\CommonClass.cs" />
+    <Compile Include="Classes\Device.cs" />
+    <Compile Include="Classes\DeviceRepository.cs" />
+    <Compile Include="Classes\NetworkClass.cs" />
+    <Compile Include="Classes\Converters\ValueConverters.cs" />
+    <Compile Include="Helpers\Punches.cs" />
+    <Compile Include="Helpers\Raw.cs" />
+    <Compile Include="Helpers\SDKHelper.cs" />
+    <Compile Include="Helpers\SearchforUSBCom.cs" />
+    <Compile Include="Helpers\UDisk.cs" />
+    <Compile Include="Helpers\UDiskStruct.cs" />
     <Compile Include="Pages\Devices\ControlPanel.xaml.cs">
       <DependentUpon>ControlPanel.xaml</DependentUpon>
     </Compile>
@@ -67,6 +91,9 @@
       <DependentUpon>ConfigPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ButtonWindowState.cs" />
+    <Compile Include="UserControls\DeviceListBoxItem.xaml.cs">
+      <DependentUpon>DeviceListBoxItem.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -84,6 +111,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Systems\ConfigPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DeviceListBoxItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -116,7 +147,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controller\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="zkemkeeper">
+      <Guid>{FE9DED34-E159-408E-8490-B720A5E632C7}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
